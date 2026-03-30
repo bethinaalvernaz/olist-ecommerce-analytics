@@ -51,7 +51,7 @@ Os dados utilizados são públicos e estão disponíveis no Kaggle:
 
 ## 🔗 Modelagem e Relacionamento entre Tabelas
 
-As tabelas foram relacionadas através de mesclagens (JOINs) no Looker Studio:
+A análise foi realizada no nível de item de pedido (olist_order_items), com agregações para nível de pedido quando necessário. As tabelas foram relacionadas através de mesclagens (JOINs) no Looker Studio:
 
 - `olist_order_items` ligada a `olist_orders` via order_id
 - `olist_order_items` ligada a `olist_products` via product_id
@@ -59,7 +59,7 @@ As tabelas foram relacionadas através de mesclagens (JOINs) no Looker Studio:
 - `olist_orders` ligada a `olist_order_reviews` via order_id
 - `olist_orders` ligada a `olist_order_payments` via order_id
 
-Todas as mesclagens utilizam **JOIN Interno (Inner Join)**, retornando apenas registros com correspondência em ambas as tabelas.
+Foi utilizado **JOIN Interno (Inner Join)** em todas as mesclagens para garantir consistência dos dados, considerando apenas registros com informações completas em todas as tabelas relacionadas.
 
 ---
 
@@ -67,10 +67,10 @@ Todas as mesclagens utilizam **JOIN Interno (Inner Join)**, retornando apenas re
 
 | Métrica | Fórmula | Fonte |
 |---------|---------|-------|
-| Receita Total | SUM(CAST(price AS NUMBER)) | order_items |
+| Receita Total | SUM(price) | order_items |
 | Frete Total | SUM(freight_value) | order_items |
 | Frete Médio | AVG(freight_value) | order_items |
-| Ticket Médio | SUM(price) / COUNT(order_id) | order_items |
+| Ticket Médio | SUM(price) / COUNT(DISTINCT order_id) | order_items |
 | Total de Pedidos | COUNT(order_id) | orders |
 | % Frete sobre Receita | (Frete Total / Receita Total) * 100 | order_items |
 | Nota Média | AVG(review_score) | order_reviews |
@@ -140,6 +140,18 @@ Análise das avaliações dos clientes.
 - **96,5 mil pedidos entregues** — taxa de entrega de **~97%**
 - Apenas **625 pedidos cancelados** — operação eficiente
 
+  ---
+
+## 🎯 Recomendações Estratégicas
+
+Com base nos insights encontrados, as seguintes ações podem gerar impacto direto no negócio:
+
+- **Reduzir custo logístico** nas categorias com frete acima de 7% da receita, como utilidades_domesticas e cama_mesa_banho — negociação com transportadoras ou revisão de embalagens
+- **Expandir presença fora do Sudeste** — SP, RJ e MG concentram a maioria dos pedidos, indicando oportunidade de crescimento em regiões como Norte e Centro-Oeste com campanhas regionais
+- **Investir nas categorias de alto volume e baixa receita** — cama_mesa_banho lidera em quantidade mas não em receita, sugerindo oportunidade de upsell e aumento de ticket médio
+- **Manter qualidade operacional** — taxa de entrega de ~97% e nota média de 4,09 são diferenciais competitivos que devem ser monitorados continuamente
+- **Explorar sazonalidade** — o pico de agosto/2018 sugere comportamento sazonal que pode ser aproveitado com campanhas antecipadas
+
 ---
 
 ## 🛠️ Ferramentas
@@ -156,6 +168,7 @@ Análise das avaliações dos clientes.
 
 Este projeto foi desenvolvido como parte do meu portfólio de transição para a área de Dados, com foco em análise de e-commerce usando ferramentas de BI. O objetivo foi aplicar conceitos de modelagem de dados, criação de métricas e storytelling visual para extrair insights acionáveis de dados reais.
 
+Este projeto simula um cenário real de tomada de decisão orientada por dados em um marketplace de e-commerce.
 ---
 
 ## 👩‍💻 Autora
