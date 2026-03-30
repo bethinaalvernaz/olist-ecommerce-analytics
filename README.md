@@ -168,7 +168,6 @@ Com base nos insights encontrados, as seguintes ações podem gerar impacto dire
 
 Este projeto foi desenvolvido como parte do meu portfólio de transição para a área de Dados, com foco em análise de e-commerce usando ferramentas de BI. O objetivo foi aplicar conceitos de modelagem de dados, criação de métricas e storytelling visual para extrair insights acionáveis de dados reais.
 
-Este projeto simula um cenário real de tomada de decisão orientada por dados em um marketplace de e-commerce.
 ---
 
 ## 👩‍💻 Autora
